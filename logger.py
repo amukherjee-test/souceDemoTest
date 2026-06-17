@@ -1,5 +1,6 @@
 import logging
 import os
+import sys
 
 
 def get_logger():
@@ -24,7 +25,7 @@ def get_logger():
         )
         file_handler.setFormatter(formatter)
 
-        console_handler = logging.StreamHandler()
+        console_handler = logging.StreamHandler(sys.stdout)
         console_handler.setFormatter(formatter)
 
         logger.addHandler(file_handler)
