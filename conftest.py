@@ -17,7 +17,7 @@ def page():
     logger.info("Launching Chromium Browser")
 
     browser = playwright.chromium.launch(
-        headless=False,
+        headless=True,
         slow_mo=500
     )
 
