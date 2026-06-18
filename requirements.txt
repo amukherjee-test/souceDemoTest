@@ -7,4 +7,6 @@ pluggy==1.6.0
 pyee==13.0.1
 Pygments==2.20.0
 pytest==9.0.3
+pytest-json-report
+pytest-metadata
 typing_extensions==4.15.0
