@@ -1,3 +1,4 @@
+import pytest
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
 from pages.cart_page import CartPage
@@ -7,6 +8,7 @@ from logger import get_logger
 logger = get_logger()
 
 
+@pytest.mark.webui_soucedemo
 def test_valid_login_and_checkout(page):
 
     login = LoginPage(page)

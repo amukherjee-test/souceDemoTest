@@ -1,9 +1,11 @@
+import pytest
 from pages.login_page import LoginPage
 from logger import get_logger
 
 logger = get_logger()
 
 
+@pytest.mark.webui_soucedemo
 def test_valid_login(page):
 
     page.goto("https://www.saucedemo.com/")
