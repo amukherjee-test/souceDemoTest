@@ -1,0 +1,156 @@
+2026-06-17 16:09:42,728 | INFO | ========== Test Started ==========
+2026-06-17 16:09:42,730 | INFO | Starting Playwright
+2026-06-17 16:09:43,467 | INFO | Launching Chromium Browser
+2026-06-17 16:09:44,445 | INFO | Creating Browser Context
+2026-06-17 16:09:44,482 | INFO | Opening New Page
+2026-06-17 16:09:48,386 | INFO | Id entered
+2026-06-17 16:09:48,994 | INFO | password entered
+2026-06-17 16:09:49,759 | INFO | logged in successfull...
+2026-06-17 16:09:50,329 | INFO | added the Sauce Labs Backpack to cart...
+2026-06-17 16:09:50,907 | INFO | added the Sauce Labs Fleece Jacket to cart...
+2026-06-17 16:09:51,522 | INFO | clicked on cart icon..
+2026-06-17 16:09:52,134 | INFO | clicked on checkout button..
+2026-06-17 16:09:52,134 | INFO | Filling the details in the checkout page
+2026-06-17 16:09:53,781 | INFO | Details filled successfully
+2026-06-17 16:09:54,488 | INFO | clicked on the continue button
+2026-06-17 16:09:55,107 | INFO | clicked on the finish button
+2026-06-17 16:09:55,107 | INFO | Test Case Executed successfully!
+2026-06-17 16:09:55,108 | INFO | Closing Browser Context
+2026-06-17 16:09:55,178 | INFO | Closing Browser
+2026-06-17 16:09:55,579 | INFO | Stopping Playwright
+2026-06-17 16:09:55,625 | INFO | ========== Test Finished ==========
+2026-06-17 16:31:43,324 | INFO | ========== Test Started ==========
+2026-06-17 16:31:43,325 | INFO | Starting Playwright
+2026-06-17 16:31:44,400 | INFO | Launching Chromium Browser
+2026-06-17 16:31:45,061 | INFO | Creating Browser Context
+2026-06-17 16:31:45,096 | INFO | Opening New Page
+2026-06-17 16:31:51,518 | INFO | Id entered
+2026-06-17 16:31:52,053 | INFO | password entered
+2026-06-17 16:31:52,670 | INFO | logged in successfull...
+2026-06-17 16:31:53,218 | INFO | added the Sauce Labs Backpack to cart...
+2026-06-17 16:31:53,766 | INFO | added the Sauce Labs Fleece Jacket to cart...
+2026-06-17 16:31:54,315 | INFO | clicked on cart icon..
+2026-06-17 16:31:54,866 | INFO | clicked on checkout button..
+2026-06-17 16:31:54,866 | INFO | Filling the details in the checkout page
+2026-06-17 16:31:56,447 | INFO | Details filled successfully
+2026-06-17 16:31:57,014 | INFO | clicked on the continue button
+2026-06-17 16:31:57,564 | INFO | clicked on the finish button
+2026-06-17 16:31:57,564 | INFO | Test Case Executed successfully!
+2026-06-17 16:31:57,566 | INFO | Closing Browser Context
+2026-06-17 16:31:57,584 | INFO | Closing Browser
+2026-06-17 16:31:57,645 | INFO | Stopping Playwright
+2026-06-17 16:31:57,678 | INFO | ========== Test Finished ==========
+2026-06-17 17:11:36,864 | INFO | ========== Test Started ==========
+2026-06-17 17:11:36,866 | INFO | Starting Playwright
+2026-06-17 17:11:37,813 | INFO | Launching Chromium Browser
+2026-06-17 17:11:38,144 | INFO | Creating Browser Context
+2026-06-17 17:11:38,168 | INFO | Opening New Page
+2026-06-17 17:11:44,078 | INFO | Id entered
+2026-06-17 17:11:44,608 | INFO | password entered
+2026-06-17 17:11:45,209 | INFO | logged in successfull...
+2026-06-17 17:11:45,793 | INFO | added the Sauce Labs Backpack to cart...
+2026-06-17 17:11:46,325 | INFO | added the Sauce Labs Fleece Jacket to cart...
+2026-06-17 17:11:46,871 | INFO | clicked on cart icon..
+2026-06-17 17:11:47,418 | INFO | clicked on checkout button..
+2026-06-17 17:11:47,418 | INFO | Filling the details in the checkout page
+2026-06-17 17:11:49,007 | INFO | Details filled successfully
+2026-06-17 17:11:49,564 | INFO | clicked on the continue button
+2026-06-17 17:11:50,122 | INFO | clicked on the finish button
+2026-06-17 17:11:50,123 | INFO | Test Case Executed successfully!
+2026-06-17 17:11:50,125 | INFO | Closing Browser Context
+2026-06-17 17:11:50,144 | INFO | Closing Browser
+2026-06-17 17:11:50,219 | INFO | Stopping Playwright
+2026-06-17 17:11:50,251 | INFO | ========== Test Finished ==========
+2026-06-17 17:20:39,236 | INFO | ========== Test Started ==========
+2026-06-17 17:20:39,241 | INFO | Starting Playwright
+2026-06-17 17:20:40,493 | INFO | Launching Chromium Browser
+2026-06-17 17:20:40,973 | INFO | Creating Browser Context
+2026-06-17 17:20:41,004 | INFO | Opening New Page
+2026-06-17 17:20:46,968 | INFO | Id entered
+2026-06-17 17:20:47,487 | INFO | password entered
+2026-06-17 17:20:48,097 | INFO | logged in successfull...
+2026-06-17 17:20:48,647 | INFO | added the Sauce Labs Backpack to cart...
+2026-06-17 17:20:49,195 | INFO | added the Sauce Labs Fleece Jacket to cart...
+2026-06-17 17:20:49,744 | INFO | clicked on cart icon..
+2026-06-17 17:20:50,279 | INFO | clicked on checkout button..
+2026-06-17 17:20:50,279 | INFO | Filling the details in the checkout page
+2026-06-17 17:20:51,853 | INFO | Details filled successfully
+2026-06-17 17:20:52,418 | INFO | clicked on the continue button
+2026-06-17 17:20:52,986 | INFO | clicked on the finish button
+2026-06-17 17:20:52,987 | INFO | Test Case Executed successfully!
+2026-06-17 17:20:52,988 | INFO | Closing Browser Context
+2026-06-17 17:20:53,006 | INFO | Closing Browser
+2026-06-17 17:20:53,080 | INFO | Stopping Playwright
+2026-06-17 17:20:53,107 | INFO | ========== Test Finished ==========
+2026-06-23 13:48:49,902 | INFO | ========== Test Started ==========
+2026-06-23 13:48:49,904 | INFO | Starting Playwright
+2026-06-23 13:48:51,081 | INFO | Launching Chromium Browser
+2026-06-23 13:48:51,743 | INFO | Creating Browser Context
+2026-06-23 13:48:51,774 | INFO | Opening New Page
+2026-06-23 13:48:52,111 | INFO | Navigating to SauceDemo Website
+2026-06-23 13:48:58,072 | INFO | Website Loaded Successfully
+2026-06-23 13:48:58,073 | INFO | Logging in as: locked_out_user
+2026-06-23 13:48:59,819 | INFO | Login submitted
+2026-06-23 13:48:59,825 | INFO | Error message: Epic sadface: Sorry, this user has been locked out.
+2026-06-23 13:48:59,825 | INFO | Locked out user test passed
+2026-06-23 13:48:59,834 | INFO | Closing Browser Context
+2026-06-23 13:48:59,865 | INFO | Closing Browser
+2026-06-23 13:48:59,945 | INFO | Stopping Playwright
+2026-06-23 13:48:59,986 | INFO | ========== Test Finished ==========
+2026-06-23 13:48:59,991 | INFO | ========== Test Started ==========
+2026-06-23 13:48:59,991 | INFO | Starting Playwright
+2026-06-23 13:49:00,934 | INFO | Launching Chromium Browser
+2026-06-23 13:49:01,140 | INFO | Creating Browser Context
+2026-06-23 13:49:01,165 | INFO | Opening New Page
+2026-06-23 13:49:01,319 | INFO | Navigating to SauceDemo Website
+2026-06-23 13:49:02,931 | INFO | Website Loaded Successfully
+2026-06-23 13:49:02,931 | INFO | Logging in as: standard_user
+2026-06-23 13:49:04,798 | INFO | Login submitted
+2026-06-23 13:49:04,809 | INFO | Login successful
+2026-06-23 13:49:04,809 | INFO | Sorting products by: za
+2026-06-23 13:49:05,365 | INFO | Sort applied
+2026-06-23 13:49:05,457 | INFO | Products listed: ['Test.allTheThings() T-Shirt (Red)', 'Sauce Labs Onesie', 'Sauce Labs Fleece Jacket', 'Sauce Labs Bolt T-Shirt', 'Sauce Labs Bike Light', 'Sauce Labs Backpack']
+2026-06-23 13:49:05,457 | INFO | Product sort Z to A test passed
+2026-06-23 13:49:05,471 | INFO | Closing Browser Context
+2026-06-23 13:49:05,494 | INFO | Closing Browser
+2026-06-23 13:49:05,564 | INFO | Stopping Playwright
+2026-06-23 13:49:05,597 | INFO | ========== Test Finished ==========
+2026-06-23 13:49:05,599 | INFO | ========== Test Started ==========
+2026-06-23 13:49:05,600 | INFO | Starting Playwright
+2026-06-23 13:49:06,565 | INFO | Launching Chromium Browser
+2026-06-23 13:49:06,752 | INFO | Creating Browser Context
+2026-06-23 13:49:06,782 | INFO | Opening New Page
+2026-06-23 13:49:06,936 | INFO | Navigating to SauceDemo Website
+2026-06-23 13:49:08,743 | INFO | Website Loaded Successfully
+2026-06-23 13:49:08,743 | INFO | Logging in as: standard_user
+2026-06-23 13:49:10,438 | INFO | Login submitted
+2026-06-23 13:49:10,446 | INFO | Login successful
+2026-06-23 13:49:10,447 | INFO | Opening burger menu
+2026-06-23 13:49:11,018 | INFO | Clicking logout
+2026-06-23 13:49:11,585 | INFO | Logged out successfully
+2026-06-23 13:49:11,617 | INFO | Logout test passed
+2026-06-23 13:49:11,619 | INFO | Closing Browser Context
+2026-06-23 13:49:11,636 | INFO | Closing Browser
+2026-06-23 13:49:11,710 | INFO | Stopping Playwright
+2026-06-23 13:49:11,741 | INFO | ========== Test Finished ==========
+2026-06-23 13:51:30,421 | INFO | ========== Test Started ==========
+2026-06-23 13:51:30,423 | INFO | Starting Playwright
+2026-06-23 13:51:31,472 | INFO | Launching Chromium Browser
+2026-06-23 13:51:31,921 | INFO | Creating Browser Context
+2026-06-23 13:51:31,954 | INFO | Opening New Page
+2026-06-23 13:51:34,636 | INFO | Id entered
+2026-06-23 13:51:35,184 | INFO | password entered
+2026-06-23 13:51:35,792 | INFO | logged in successfull...
+2026-06-23 13:51:36,347 | INFO | added the Sauce Labs Backpack to cart...
+2026-06-23 13:51:36,884 | INFO | added the Sauce Labs Fleece Jacket to cart...
+2026-06-23 13:51:37,449 | INFO | clicked on cart icon..
+2026-06-23 13:51:37,993 | INFO | clicked on checkout button..
+2026-06-23 13:51:37,993 | INFO | Filling the details in the checkout page
+2026-06-23 13:51:39,596 | INFO | Details filled successfully
+2026-06-23 13:51:40,163 | INFO | clicked on the continue button
+2026-06-23 13:51:40,743 | INFO | clicked on the finish button
+2026-06-23 13:51:40,744 | INFO | Test Case Executed successfully!
+2026-06-23 13:51:40,746 | INFO | Closing Browser Context
+2026-06-23 13:51:40,764 | INFO | Closing Browser
+2026-06-23 13:51:40,837 | INFO | Stopping Playwright
+2026-06-23 13:51:40,870 | INFO | ========== Test Finished ==========
