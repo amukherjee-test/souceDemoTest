@@ -43,7 +43,7 @@ jobs:
         run: |
 
           RESPONSE=$(curl -s -X POST \
-          http://https://version-fence-fretted.ngrok-free.dev/api/runs \
+          https://version-fence-fretted.ngrok-free.dev/api/runs \
           -H "x-api-key: ${{ secrets.QA_API_KEY }}" \
           -H "Content-Type: application/json" \
           -d '{
