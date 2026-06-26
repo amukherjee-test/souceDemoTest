@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-
   workflow_dispatch:
 
 env:
@@ -13,78 +12,133 @@ env:
   BROWSER: chromium
 
 jobs:
-
   playwright-test:
 
-    runs-on: ubuntu-latest
+    # IMPORTANT: Use your self-hosted runner
+    runs-on:
+      - self-hosted
+      - Linux
+      - X64
 
     steps:
 
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Show Runner Information
+        run: |
+          echo "Runner Name : $RUNNER_NAME"
+          echo "Runner OS   : $RUNNER_OS"
+          echo "Hostname    : $(hostname)"
+          echo "Workspace   : $(pwd)"
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install Python Dependencies
+      - name: Verify Python
+        run: |
+          python --version
+          pip --version
+
+      - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Install Playwright Browsers
         run: |
-          playwright install --with-deps chromium
+          python -m playwright install --with-deps chromium
+
+      - name: Verify API Secret
+        env:
+          QA_API_KEY: ${{ secrets.QA_API_KEY }}
+        run: |
+          if [ -z "$QA_API_KEY" ]; then
+            echo "QA_API_KEY secret is missing!"
+            exit 1
+          fi
+
+          echo "QA_API_KEY found"
+          echo "Secret Length: ${#QA_API_KEY}"
+
+      - name: Test API Connectivity
+        run: |
+          echo "Checking API..."
+
+          curl -v \
+            --connect-timeout 10 \
+            http://10.10.10.173:5000/
 
       - name: Create Test Run
         id: create_run
-
+        env:
+          QA_API_KEY: ${{ secrets.QA_API_KEY }}
         run: |
 
-          RESPONSE=$(curl -s -X POST \
-          http://10.10.10.173:5000/api/runs \
-          -H "x-api-key: ${{ secrets.QA_API_KEY }}" \
-          -H "Content-Type: application/json" \
-          -d '{
-                "jobName":"GitHub Actions",
-                "buildNumber":"${{ github.run_number }}",
-                "branch":"${{ github.ref_name }}",
-                "triggeredBy":"github-actions"
-              }')
+          RESPONSE=$(curl -v \
+            --connect-timeout 10 \
+            --max-time 30 \
+            -X POST \
+            http://10.10.10.173:5000/api/runs \
+            -H "x-api-key: $QA_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{
+                  "jobName":"GitHub Actions",
+                  "buildNumber":"${{ github.run_number }}",
+                  "branch":"${{ github.ref_name }}",
+                  "triggeredBy":"github-actions"
+                }')
 
-          echo $RESPONSE
+          echo "Response:"
+          echo "$RESPONSE"
 
-          RUN_ID=$(echo $RESPONSE | sed -n 's/.*"runId":"\([^"]*\)".*/\1/p')
+          RUN_ID=$(echo "$RESPONSE" | sed -n 's/.*"runId":"\([^"]*\)".*/\1/p')
+
+          if [ -z "$RUN_ID" ]; then
+            echo "ERROR: RUN_ID not found."
+            exit 1
+          fi
 
           echo "RUN_ID=$RUN_ID"
 
-          echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
+          echo "RUN_ID=$RUN_ID" >> "$GITHUB_ENV"
 
-      - name: Run Tests
+      - name: Run Playwright Tests
         run: |
+          mkdir -p results
+
           pytest \
-          --json-report \
-          --json-report-file=results/report.json \
-          --json-report-omit=collectors,log,streams
+            --json-report \
+            --json-report-file=results/report.json \
+            --json-report-omit=collectors,log,streams
 
       - name: Upload Report to API
-
         if: always()
-
+        env:
+          QA_API_KEY: ${{ secrets.QA_API_KEY }}
         run: |
 
-          curl -X POST \
-          "http://10.10.10.173:5000/api/runs/$RUN_ID/artifacts" \
-          -H "x-api-key: ${{ secrets.QA_API_KEY }}" \
-          -F "files=@results/report.json"
+          if [ ! -f results/report.json ]; then
+            echo "results/report.json not found."
+            exit 1
+          fi
+
+          if [ -z "$RUN_ID" ]; then
+            echo "RUN_ID missing. Skipping upload."
+            exit 0
+          fi
+
+          curl -v \
+            -X POST \
+            "http://10.10.10.173:5000/api/runs/$RUN_ID/artifacts" \
+            -H "x-api-key: $QA_API_KEY" \
+            -F "files=@results/report.json"
 
       - name: Upload GitHub Artifact
-
         if: always()
-
         uses: actions/upload-artifact@v4
-
         with:
           name: pytest-report
           path: results/report.json
