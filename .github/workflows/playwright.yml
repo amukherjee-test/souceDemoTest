@@ -1,1 +1,91 @@
 
+name: Playwright Automation
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+env:
+  QA_PROJECT: qa-insight
+  TEST_ENV: dev
+  BROWSER: chromium
+
+jobs:
+
+  playwright-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Playwright Browsers
+        run: |
+          playwright install --with-deps chromium
+
+      - name: Create Test Run
+        id: create_run
+
+        run: |
+
+          RESPONSE=$(curl -s -X POST \
+          http://10.10.10.173:5000/api/runs \
+          -H "x-api-key: ${{ secrets.QA_API_KEY }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+                "jobName":"GitHub Actions",
+                "buildNumber":"${{ github.run_number }}",
+                "branch":"${{ github.ref_name }}",
+                "triggeredBy":"github-actions"
+              }')
+
+          echo $RESPONSE
+
+          RUN_ID=$(echo $RESPONSE | sed -n 's/.*"runId":"\([^"]*\)".*/\1/p')
+
+          echo "RUN_ID=$RUN_ID"
+
+          echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
+
+      - name: Run Tests
+        run: |
+          pytest \
+          --json-report \
+          --json-report-file=results/report.json \
+          --json-report-omit=collectors,log,streams
+
+      - name: Upload Report to API
+
+        if: always()
+
+        run: |
+
+          curl -X POST \
+          "http://10.10.10.173:5000/api/runs/$RUN_ID/artifacts" \
+          -H "x-api-key: ${{ secrets.QA_API_KEY }}" \
+          -F "files=@results/report.json"
+
+      - name: Upload GitHub Artifact
+
+        if: always()
+
+        uses: actions/upload-artifact@v4
+
+        with:
+          name: pytest-report
+          path: results/report.json
