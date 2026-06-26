@@ -4,126 +4,87 @@ on:
   push:
     branches:
       - main
+
   workflow_dispatch:
 
 env:
   QA_PROJECT: qa-insight
   TEST_ENV: dev
   BROWSER: chromium
-  PLAYWRIGHT_BROWSERS_PATH: ~/.cache/ms-playwright
 
 jobs:
+
   playwright-test:
 
-    runs-on:
-      - self-hosted
-      - Linux
-      - X64
+    runs-on: ubuntu-latest
 
     steps:
 
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Show Runner Information
-        run: |
-          echo "Runner Name : $RUNNER_NAME"
-          echo "Runner OS   : $RUNNER_OS"
-          echo "Hostname    : $(hostname)"
-          echo "Workspace   : $(pwd)"
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-      - name: Verify Python
+      - name: Install Python Dependencies
         run: |
-          python3 --version
-          python3 -m pip --version
-
-      - name: Create Virtual Environment
-        run: |
-          python3 -m venv .venv
-
-      - name: Install Dependencies
-        run: |
-          . .venv/bin/activate
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Install Playwright Browsers
         run: |
-          . .venv/bin/activate
-
-          if [ -d "$PLAYWRIGHT_BROWSERS_PATH" ] && \
-             find "$PLAYWRIGHT_BROWSERS_PATH" -maxdepth 1 -name "chromium-*" | grep -q .; then
-              echo "Chromium already installed."
-          else
-              python -m playwright install --with-deps chromium
-          fi
-
-      - name: Verify API Secret
-        env:
-          QA_API_KEY: ${{ secrets.QA_API_KEY }}
-        run: |
-          if [ -z "$QA_API_KEY" ]; then
-            echo "QA_API_KEY secret not found."
-            exit 1
-          fi
+          playwright install --with-deps chromium
 
       - name: Create Test Run
-        env:
-          QA_API_KEY: ${{ secrets.QA_API_KEY }}
+        id: create_run
+
         run: |
+
           RESPONSE=$(curl -s -X POST \
-            http://10.10.10.173:5000/api/runs \
-            -H "x-api-key: $QA_API_KEY" \
-            -H "Content-Type: application/json" \
-            -d '{
-                  "jobName":"GitHub Actions",
-                  "buildNumber":"${{ github.run_number }}",
-                  "branch":"${{ github.ref_name }}",
-                  "triggeredBy":"github-actions"
-                }')
+          http://https://version-fence-fretted.ngrok-free.dev/api/runs \
+          -H "x-api-key: ${{ secrets.QA_API_KEY }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+                "jobName":"GitHub Actions",
+                "buildNumber":"${{ github.run_number }}",
+                "branch":"${{ github.ref_name }}",
+                "triggeredBy":"github-actions"
+              }')
 
-          echo "$RESPONSE"
+          echo $RESPONSE
 
-          RUN_ID=$(echo "$RESPONSE" | sed -n 's/.*"runId":"\([^"]*\)".*/\1/p')
+          RUN_ID=$(echo $RESPONSE | sed -n 's/.*"runId":"\([^"]*\)".*/\1/p')
 
-          if [ -z "$RUN_ID" ]; then
-            echo "Unable to extract RUN_ID"
-            exit 1
-          fi
+          echo "RUN_ID=$RUN_ID"
 
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
 
-      - name: Run Playwright Tests
+      - name: Run Tests
         run: |
-          . .venv/bin/activate
-
-          mkdir -p results
-
           pytest \
-            --json-report \
-            --json-report-file=results/report.json \
-            --json-report-omit=collectors,log,streams
+          --json-report \
+          --json-report-file=results/report.json \
+          --json-report-omit=collectors,log,streams
 
       - name: Upload Report to API
+
         if: always()
-        env:
-          QA_API_KEY: ${{ secrets.QA_API_KEY }}
+
         run: |
 
-          if [ -f results/report.json ]; then
-
-            curl -X POST \
-              "http://10.10.10.173:5000/api/runs/$RUN_ID/artifacts" \
-              -H "x-api-key: $QA_API_KEY" \
-              -F "files=@results/report.json"
-
-          else
-            echo "report.json not found."
-          fi
+          curl -X POST \
+          "https://version-fence-fretted.ngrok-free.dev/api/runs/$RUN_ID/artifacts" \
+          -H "x-api-key: ${{ secrets.QA_API_KEY }}" \
+          -F "files=@results/report.json"
 
       - name: Upload GitHub Artifact
+
         if: always()
+
         uses: actions/upload-artifact@v4
+
         with:
-          name: playwright-report
+          name: pytest-report
           path: results/report.json
